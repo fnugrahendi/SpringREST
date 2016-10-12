@@ -1,0 +1,22 @@
+.gradle
+build
+out
+.idea
+.idea/*
+*.iml
+classes
+.directory
+*.iws
+*.ipr
+*.jar
+.DS_Store
+
+### NetBeans ###
+nbproject/private/
+private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
