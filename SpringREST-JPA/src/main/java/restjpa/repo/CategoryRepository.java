@@ -20,12 +20,12 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
     * @param name
     * @return list of recipes
     */
-    List<Recipe> findByName(@Param("name") String name);
+    List<Category> findByName(@Param("name") String name);
 
     // Return lists of category's name by passed id parameter
     @Query("SELECT c.name FROM Category c WHERE c.id = :id")
-    Recipe findNameById(@Param("id") Long id);
+    Category findNameById(@Param("id") Long id);
 
     // Return lists of recipes by its name sort ascending
-    List<Recipe> findByNameOrderByNameAsc(@Param("name") String name);
+    List<Category> findByNameOrderByNameAsc(@Param("name") String name);
 }

@@ -20,12 +20,12 @@ public interface ChefRepository extends PagingAndSortingRepository<Chef, Long> {
     * @param name
     * @return list of recipes
     */
-    List<Recipe> findByName(@Param("name") String name);
+    List<Chef> findByName(@Param("name") String name);
 
     // Return lists of chef's name by passed id parameter
     @Query("SELECT f.name FROM Chef f WHERE f.id = :id")
-    Recipe findNameById(@Param("id") Long id);
+    Chef findNameById(@Param("id") Long id);
 
     // Return lists of chefs by its name sort ascending
-    List<Recipe> findByNameOrderByNameAsc(@Param("name") String name);
+    List<Chef> findByNameOrderByNameAsc(@Param("name") String name);
 }

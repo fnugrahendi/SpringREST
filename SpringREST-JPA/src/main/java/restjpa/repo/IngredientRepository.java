@@ -20,12 +20,15 @@ public interface IngredientRepository extends PagingAndSortingRepository<Ingredi
     * @param name
     * @return list of recipes
     */
-    List<Recipe> findByName(@Param("name") String name);
+    List<Ingredient> findByName(@Param("name") String name);
 
     // Return lists of chef's name by passed id parameter
-    @Query("SELECT f.name FROM Chef f WHERE f.id = :id")
-    Recipe findNameById(@Param("id") Long id);
+    @Query("SELECT f.name FROM Ingredient f WHERE f.id = :id")
+    Ingredient findNameById(@Param("id") Long id);
 
     // Return lists of recipes by its name sort ascending
-    List<Recipe> findByNameOrderByNameAsc(@Param("name") String name);
+    List<Ingredient> findByNameOrderByNameAsc(@Param("name") String name);
+
+    @Query("SELECT i FROM Ingredient i")
+    List<Ingredient> findAllIngredient();
 }
