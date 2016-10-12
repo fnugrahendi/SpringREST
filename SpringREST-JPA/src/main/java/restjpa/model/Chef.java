@@ -21,7 +21,7 @@ public class Chef {
         return id;
     }
 
-    public void setId(){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class Chef {
         return name;
     }
 
-    public void setName(){
+    public void setName(String name){
         this.name = name;
     }
 
