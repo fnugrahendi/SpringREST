@@ -17,6 +17,12 @@ public class Category {
     @OneToMany(mappedBy = "categoryId", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Recipe> recipes;
 
+    public Category(){}
+
+    public Category(String name){
+        this.name = name;
+    }
+
     public Long getId(){
         return id;
     }

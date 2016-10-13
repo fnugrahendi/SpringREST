@@ -17,6 +17,12 @@ public class Chef {
     @OneToMany(mappedBy = "chefId", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Recipe> recipes;
 
+    public Chef(){}
+
+    public Chef(String name){
+        this.name = name;
+    }
+
     public Long getId(){
         return id;
     }
