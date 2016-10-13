@@ -24,8 +24,22 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Chef.class)
     private Chef chefId;
 
-    @OneToMany(mappedBy = "recipeId", fetch = FetchType.LAZY, orphanRemoval = true)
+    @ManyToMany(mappedBy = "recipeId", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
+
+    public Recipe(){}
+
+    public Recipe(String name,
+                  String description,
+                  Category categoryId,
+                  Chef chefId,
+                  List<Ingredient> ingredients){
+        this.name = name;
+        this.description = description;
+        this.categoryId = categoryId;
+        this.chefId = chefId;
+        this.ingredients = ingredients;
+    }
 
     public Long getId(){
         return id;

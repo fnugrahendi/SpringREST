@@ -1,6 +1,8 @@
 package restjpa.model;
 
 import javax.persistence.*;
+import java.util.Set;
+
 /**
  * Created by SRIN on 10/12/2016.
  */
@@ -12,9 +14,18 @@ public class Ingredient {
 
     private String name;
 
-    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Recipe.class)
-    private Recipe recipeId;
+    @JoinTable(name = "recipe_ingredients",
+                joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Recipe.class)
+    private Set<Recipe> recipeId;
+
+    public Ingredient(){
+    }
+
+    public Ingredient(String name){
+        this.name = name;
+    }
 
     public Long getId(){
         return id;
@@ -32,11 +43,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public Recipe getRecipeId(){
+    public Set<Recipe> getRecipeId(){
         return recipeId;
     }
 
-    public void setRecipeId(Recipe recipeId) {
+    public void setRecipeId(Set<Recipe> recipeId) {
         this.recipeId = recipeId;
     }
 }
