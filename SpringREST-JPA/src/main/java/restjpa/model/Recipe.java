@@ -2,6 +2,7 @@ package restjpa.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by SRIN on 10/12/2016.
@@ -24,8 +25,8 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Chef.class)
     private Chef chefId;
 
-    @ManyToMany(mappedBy = "recipeId", fetch = FetchType.LAZY)
-    private List<Ingredient> ingredients;
+    @ManyToMany(mappedBy = "recipes", fetch = FetchType.LAZY)
+    private Set<Ingredient> ingredients;
 
     public Recipe(){}
 
@@ -33,7 +34,7 @@ public class Recipe {
                   String description,
                   Category categoryId,
                   Chef chefId,
-                  List<Ingredient> ingredients){
+                  Set<Ingredient> ingredients){
         this.name = name;
         this.description = description;
         this.categoryId = categoryId;
@@ -81,11 +82,11 @@ public class Recipe {
         this.chefId = chefId;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 }

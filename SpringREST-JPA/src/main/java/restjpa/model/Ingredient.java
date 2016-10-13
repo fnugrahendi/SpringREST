@@ -14,11 +14,11 @@ public class Ingredient {
 
     private String name;
 
-    @JoinTable(name = "recipe_ingredients",
-                joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"))
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Recipe.class)
-    private Set<Recipe> recipeId;
+    @JoinTable(name = "recipe_ingredient",
+                joinColumns = {@JoinColumn(name = "ingredient_id", referencedColumnName = "id")},
+                inverseJoinColumns = {@JoinColumn(name = "recipe_id", referencedColumnName = "id")})
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Recipe> recipes;
 
     public Ingredient(){
     }
@@ -43,11 +43,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public Set<Recipe> getRecipeId(){
-        return recipeId;
+    public Set<Recipe> getRecipes(){
+        return recipes;
     }
 
-    public void setRecipeId(Set<Recipe> recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }
