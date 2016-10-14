@@ -1,23 +1,26 @@
 package restjpa.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by SRIN on 10/12/2016.
  */
 @Entity
-public class Ingredient {
+public class Ingredient implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @JoinTable(name = "recipe_ingredient",
+    @JoinTable(name = "ingredient_recipe",
                 joinColumns = {@JoinColumn(name = "ingredient_id", referencedColumnName = "id")},
                 inverseJoinColumns = {@JoinColumn(name = "recipe_id", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private Set<Recipe> recipes;
 
     public Ingredient(){

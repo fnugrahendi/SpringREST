@@ -65,38 +65,52 @@ public class Application implements CommandLineRunner{
         Ingredient oil = new Ingredient("Oil");
         Ingredient water = new Ingredient("Ice Cubes");
         Ingredient sugar = new Ingredient("Sugar");
-//        ingredientRepo.save(guava);
-//        ingredientRepo.save(oil);
-//        ingredientRepo.save(water);
-//        ingredientRepo.save(sugar);
+        ingredientRepo.save(guava);
+        ingredientRepo.save(oil);
+        ingredientRepo.save(water);
+        ingredientRepo.save(sugar);
 
         Chef chefJuno = new Chef("Juno");
         Chef chefJoko = new Chef("Pak Joko");
         chefRepo.save(chefJuno);
         chefRepo.save(chefJoko);
 
-        Set<Ingredient> gjIngredient = new HashSet<Ingredient>();
-        gjIngredient.add(water);
-        gjIngredient.add(sugar);
-        gjIngredient.add(guava);
+//        Set<Ingredient> gjIngredient = new HashSet<Ingredient>();
+//        gjIngredient.add(water);
+//        gjIngredient.add(sugar);
+//        gjIngredient.add(guava);
 //        LOG.info(gjIngredient.toString());
         Recipe guavaJuice = new Recipe("Guava Juice",
                                 "Slice of guava mixed with sugar and blended with ice cubes",
                                 beverages,
                                 chefJuno,
-                                gjIngredient);
+                                new HashSet<Ingredient>(){
+                                    {
+                                        add(water);
+                                        add(sugar);
+                                        add(guava);
+                                    }
+                                });
         recipeRepo.save(guavaJuice);
 
-        gjIngredient.clear();
-        gjIngredient.add(guava);
-        gjIngredient.add(oil);
-        gjIngredient.add(sugar);
+
+//        gjIngredient.clear();
+//        gjIngredient.add(guava);
+//        gjIngredient.add(oil);
+//        gjIngredient.add(sugar);
 //        LOG.info(gjIngredient.toString());
         Recipe crispyGuava = new Recipe("Crispy Guava",
                 "Slices of guava mixed with secret ingredients and fried using VCO",
                 food,
                 chefJoko,
-                gjIngredient);
+                new HashSet<Ingredient>(){
+                    {
+                        add(guava);
+                        add(oil);
+                        add(sugar);
+                    }
+                });
+//        crispyGuava.setIngredients(gjIngredient);
         recipeRepo.save(crispyGuava);
     }
 }

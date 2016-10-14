@@ -1,20 +1,24 @@
 package restjpa.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by SRIN on 10/12/2016.
  */
 @Entity
-public class Chef {
+public class Chef implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "chefId", fetch = FetchType.LAZY, orphanRemoval = true)
+//    @OneToMany(mappedBy = "chef", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany
     private List<Recipe> recipes;
 
     public Chef(){}

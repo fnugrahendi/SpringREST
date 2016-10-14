@@ -1,14 +1,16 @@
 package restjpa.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by SRIN on 10/12/2016.
  */
 @Entity
-public class Recipe {
+public class Recipe implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,28 +20,37 @@ public class Recipe {
     private String description;
 
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class)
-    private Category categoryId;
+    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class)
+    private Category category;
 
     @JoinColumn(name = "chef_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Chef.class)
-    private Chef chefId;
+//    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Chef.class)
+    @ManyToOne
+    private Chef chef;
 
-    @ManyToMany(mappedBy = "recipes", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "recipes")
     private Set<Ingredient> ingredients;
 
     public Recipe(){}
 
     public Recipe(String name,
                   String description,
-                  Category categoryId,
-                  Chef chefId,
+                  Category category,
+                  Chef chef,
                   Set<Ingredient> ingredients){
         this.name = name;
         this.description = description;
-        this.categoryId = categoryId;
-        this.chefId = chefId;
+        this.category = category;
+        this.chef = chef;
         this.ingredients = ingredients;
+    }
+
+    public Recipe(String name, String description, Category category, Chef chef) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.chef = chef;
     }
 
     public Long getId(){
@@ -66,20 +77,20 @@ public class Recipe {
         this.description = description;
     }
 
-    public Category getCategoryId(){
-        return categoryId;
+    public Category getCategory(){
+        return category;
     }
 
-    public void setCategoryId(Category categoryId){
-        this.categoryId = categoryId;
+    public void setCategory(Category category){
+        this.category = category;
     }
 
-    public Chef getChefId(){
-        return chefId;
+    public Chef getChef(){
+        return chef;
     }
 
-    public void setChefId(Chef chefId){
-        this.chefId = chefId;
+    public void setChef(Chef chef){
+        this.chef = chef;
     }
 
     public Set<Ingredient> getIngredients() {
